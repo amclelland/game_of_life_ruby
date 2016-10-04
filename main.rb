@@ -24,7 +24,17 @@ class MyWindow < Gosu::Window
   end
   
   def update
+    if button_down?(Gosu::MsLeft)
+      @grid.send_click(clicked_x_cell, clicked_y_cell)
+    end
     
+    if button_down?(Gosu::MsRight)
+      @grid.send_right_click(clicked_x_cell, clicked_y_cell)
+    end
+    
+    if button_down?(Gosu::KbSpace)
+      @grid.step
+    end
   end
   
   private
@@ -43,18 +53,9 @@ class MyWindow < Gosu::Window
   
   def button_down(id)
     case id
-    when Gosu::MsLeft
-      handle_left_click
-    when Gosu::KbSpace
+    when Gosu::KbRight
       @grid.step
     end
-  end
-  
-  def handle_left_click
-    puts "#{mouse_x}, #{mouse_y}"
-    puts "#{clicked_x_cell}, #{clicked_y_cell}"
-    
-    @grid.send_click(clicked_x_cell, clicked_y_cell)
   end
   
   def clicked_x_cell

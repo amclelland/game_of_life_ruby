@@ -33,7 +33,12 @@ class Grid
   
   def send_click(x, y)
     cell = @cells[x][y]
-    cell.toggle
+    cell.alive!
+  end
+  
+  def send_right_click(x, y)
+    cell = @cells[x][y]
+    cell.kill!
   end
   
   def step

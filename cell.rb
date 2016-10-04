@@ -33,4 +33,12 @@ class Cell
   def set_next
     @alive = @next
   end
+  
+  def alive!
+    @alive = true
+  end
+  
+  def kill!
+    @alive = false
+  end
 end
