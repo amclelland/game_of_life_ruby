@@ -13,14 +13,18 @@ class Grid
     
     @cells = []
     (0..@grid_x).each do |x|
+      row = []
+      
       (0..@grid_y).each do |y|
-        @cells << Cell.new(x, y)
+        row << Cell.new(x, y)
       end
+      
+      @cells << row
     end
   end
   
   def draw
-    @cells.each do |cell|
+    @cells.flatten.each do |cell|
       draw_cell(cell)
     end
     
@@ -28,17 +32,16 @@ class Grid
   end
   
   def send_click(x, y)
-    cell = @cells.select { |cell| cell.x == x && cell.y == y }.first
-    
+    cell = @cells[x][y]
     cell.toggle
   end
   
   def step
-    @cells.each do |cell|
+    @cells.flatten.each do |cell|
       cell.step(living_neighbors_count(cell))
     end
     
-    @cells.each do |cell|
+    @cells.flatten.each do |cell|
       cell.set_next
     end
   end
@@ -51,7 +54,8 @@ class Grid
     ((cell.x-1)..(cell.x+1)).each do |x|
       ((cell.y-1)..(cell.y+1)).each do |y|
         next if x == cell.x && y == cell.y
-        neighbor = @cells.select { |cell| cell.x == x && cell.y == y }.first
+        neighborx = @cells[x]
+        neighbor = neighborx ? neighborx[y] : nil 
         neighbors << neighbor unless neighbor.nil?
       end
     end

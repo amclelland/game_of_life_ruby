@@ -8,9 +8,9 @@ class MyWindow < Gosu::Window
   attr_reader :grid
   attr_accessor :cells
   
-  GRID_X    = 20
-  GRID_Y    = 20
-  CELL_SIZE = 50
+  GRID_X    = 50
+  GRID_Y    = 50
+  CELL_SIZE = 25
   
   def initialize
     super width, height, false
