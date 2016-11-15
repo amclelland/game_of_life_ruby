@@ -8,8 +8,8 @@ class MyWindow < Gosu::Window
   attr_reader :grid
   attr_accessor :cells
   
-  GRID_X    = 50
-  GRID_Y    = 50
+  GRID_X    = 40
+  GRID_Y    = 40
   CELL_SIZE = 25
   
   def initialize
